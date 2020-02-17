@@ -1,0 +1,309 @@
+/*************
+   GLOBAL
+ *************/
+
+@import url('https://fonts.googleapis.com/css?family=Barlow&display=swap');
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Barlow', sans-serif;
+}
+
+body {
+    animation: colorchange 90s infinite;
+}
+
+@keyframes colorchange {
+    0% {
+        background: #fffafa;
+    }
+    25% {
+        background: #f5fefc;
+        ;
+    }
+    50% {
+        background: #fffff0;
+    }
+    75% {
+        background: #f8fff3;
+    }
+    100% {
+        background: #fffafa;
+    }
+}
+
+
+/*************
+   HEADLINE
+ *************/
+
+.headline-container {
+    background-color: #50c878;
+    height: 50px;
+    border-bottom: 1px solid grey;
+    box-shadow: 3px 3px 8px grey;
+    display: flex;
+    justify-content: start;
+}
+
+.headline {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+/*************
+     MODAL
+ *************/
+
+
+/* Big Button on front page */
+
+.bigBtnContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#bigBtn {
+    border-radius: 4px;
+    background-color: #6d73da;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 70%;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+#bigBtn:hover,
+#bigBtn:focus {
+    box-shadow: 4px 4px 8px black;
+    width: 75%;
+}
+
+
+/* Sliders for the abv & ibu */
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 15px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 10px;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #50c878;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #50c878;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+
+/* The Modal background */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Black w/ opacity */
+}
+
+
+/* The Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*************
+ SEARCH FOR BEER
+ *************/
+
+.container {
+    margin: 0px;
+    padding: 5px;
+}
+
+.searchHeadline {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#beer-name {
+    padding: 5px;
+    width: 200px;
+}
+
+#searchName,
+#random,
+#searchABV {
+    margin: 5px;
+    padding: 5px;
+}
+
+
+/*************
+   INFO/RESULT
+ *************/
+
+.info {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#beer-text {
+    font-size: large;
+    margin-bottom: 5%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#beer-img {
+    height: 35%;
+    width: 35%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 5%;
+}
+
+#beer-food {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* google search bar/button/message */
+
+.googleSearch {
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+.googleMessage {
+    padding: 5px;
+}
+
+.googleContainer {
+    padding: 5px;
+    opacity: 1;
+}
+
+#googleBar {
+    border-radius: 4px;
+    padding: 4px;
+    width: 180px;
+}
+
+#googleButton {
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+
+/*************
+   RESPONSIVE
+ ************/
+
+
+/* Responsiv iPad */
+
+@media screen and (min-width:700px) {
+    #bigBtn {
+        width: 50%;
+    }
+    #beer-img {
+        height: 10%;
+        width: 10%;
+    }
+}
+
+
+/* Responsiv laptop */
+
+@media screen and (min-width: 1050px) {
+    .bigBtnContainer {
+        justify-content: start;
+    }
+    #bigBtn {
+        width: 20%;
+    }
+    #bigBtn:hover,
+    #bigBtn:focus {
+        box-shadow: 4px 4px 8px black;
+        width: 25%;
+    }
+    #beer-text {
+        font-size: 4vw;
+    }
+    #beer-img {
+        height: 8%;
+        width: 8%;
+    }
+    #beer-food {
+        font-size: 3vw;
+    }
+    .googleContainer {
+        opacity: 0.5;
+    }
+    .googleContainer:hover {
+        opacity: 1;
+    }
+}

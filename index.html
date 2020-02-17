@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Beer Goggles</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/426ba08774.js" crossorigin="anonymous"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+    <div class="headline-container">
+        <div class="headline">
+            Beer Goggles &nbsp
+            <i class="fas fa-beer"></i>
+        </div>
+    </div>
+
+    <!-- modaltest -->
+    <div class="bigBtnContainer">
+        <input type="submit" value="Search" id="bigBtn">
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="container">
+                <div class="searchHeadline">Search by Name</div>
+                <input type="text" id="beer-name" placeholder="Enter a beer from brewdog" list="beerName" />
+                <datalist id="beerName"></datalist>
+                <input type="submit" value="Search Name" id="searchName" />
+                <hr>
+                <div class="searchHeadline">Search by ABV and IBU</div>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="20" value="4" class="slider" id="abvSlider">
+                </div>
+                <p>ABV: <span id="abvSpan"></span></p>
+                <input type="range" min="0" max="120" value="40" class="slider" id="ibuSlider">
+            </div>
+            <p>IBU: <span id="ibuSpan"></span></p>
+            <input type="submit" value="Search Attributes" id="searchABV" />
+            <hr>
+            <div class="searchHeadline">Or Random Beer</div>
+            <input type="submit" value="Random" id="random">
+        </div>
+    </div>
+
+
+    <div class="info">
+        <div id="beer-text"></div>
+        <img id="beer-img">
+        <div id="beer-food"></div>
+        <div class="googleSearch">
+            <div class="googleMessage">Do you want to search for food pairing?</div>
+            <div class="googleContainer">
+                <form action="https://www.google.com/search" method="GET">
+                    <input type="text" id="googleBar" placeholder="Google Search" name="q">
+                    <input type="submit" id="googleButton" value="GO">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="/js/api.js"></script>
+</body>
+
+</html>
