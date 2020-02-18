@@ -39,24 +39,21 @@ $(() => {
                         let queryUrl = "https://api.punkapi.com/v2/beers?beer_name=" + $("#beer-name").val();
                         console.log(queryUrl) //såhär långt funkar det
 
+                        //Härifrån funkar det inte.
                         $.ajax({
-                            type: "Get",
                             url: queryUrl,
                             dataType: 'json',
                             success: (result) => {
-                                $("#beer-name").empty();
+                                $("#beerName").empty();
                                 for (let i = 0; i < result.length; i++) {
-                                    let [id, name] = result[i];
-                                    $("#beer-name").append("<option data-value='" + id + "'>" + name + "</option>");
+                                    let name = result[i];
+                                    $("#beerName").append(name);
                                 }
                             }
                         })
                     }
                 })
-
             }) //ajax end
-
-
     }
 
 
@@ -94,40 +91,29 @@ $(() => {
     var abvSlider = document.getElementById("abvSlider");
     var abvOutput = document.getElementById("abvSpan");
     abvOutput.innerHTML = abvSlider.value;
-
-
     abvSlider.oninput = function() {
         abvOutput.innerHTML = this.value;
     }
+
     var ibuSlider = document.getElementById("ibuSlider");
     var ibuOutput = document.getElementById("ibuSpan");
     ibuOutput.innerHTML = ibuSlider.value;
-
-
     ibuSlider.oninput = function() {
         ibuOutput.innerHTML = this.value;
     }
 
     // MODAL
-
     var modal = document.getElementById("myModal");
-
-
     var btn = document.getElementById("bigBtn");
-
-
     var closeX = document.getElementsByClassName("close")[0];
-
 
     btn.onclick = function() {
         modal.style.display = "block";
     }
 
-
     closeX.onclick = function() {
         modal.style.display = "none";
     }
-
 
     window.onclick = function(event) {
             if (event.target == modal) {
