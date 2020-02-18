@@ -1,5 +1,6 @@
 //jQuery start
 $(() => {
+
     //search by name
     $("#searchName").click(() => {
         callAPI();
@@ -19,11 +20,6 @@ $(() => {
         callRandomAPI();
     });
 
-
-
-
-
-
     function callAPI() {
         //search by name
         let search = $("#beer-name");
@@ -41,17 +37,18 @@ $(() => {
                 $("#beer-name").on("input", () => {
                     if ($("#beer-name").val().length > 2) {
                         let queryUrl = "https://api.punkapi.com/v2/beers?beer_name=" + $("#beer-name").val();
+                        console.log(queryUrl) //såhär långt funkar det
 
                         $.ajax({
+                            type: "Get",
                             url: queryUrl,
                             dataType: 'json',
                             success: (result) => {
-                                $("#beenName").empty();
+                                $("#beer-name").empty();
                                 for (let i = 0; i < result.length; i++) {
                                     let [id, name] = result[i];
-                                    $("#beerName").append("<option data-value='" + id + "'>" + name + "</option>");
+                                    $("#beer-name").append("<option data-value='" + id + "'>" + name + "</option>");
                                 }
-
                             }
                         })
                     }
@@ -59,13 +56,7 @@ $(() => {
 
             }) //ajax end
 
-        if ($("#searchName").clicked()) {
 
-        } else if ($("#searchABV")) {
-
-        } else {
-
-        }
     }
 
 
