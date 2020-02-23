@@ -1,21 +1,21 @@
 //jQuery start
 $(() => {
 
-    //search by name
+
     $("#searchName").click(() => {
         callAPI();
     });
-    //search by name by pressing enter
+
     $("#beer-name").keydown(function(e) {
         if (e.keyCode === 13) {
             callAPI()
         }
     });
-    //search by abv & ibu
+
     $("#searchABV").click(() => {
         callAbvAPI();
     });
-    //search random beer
+
     $("#random").click(() => {
         callRandomAPI();
     });
@@ -54,6 +54,7 @@ $(() => {
                     }
                 })
             }) //ajax end
+
     }
 
 
@@ -88,43 +89,54 @@ $(() => {
     }
 
     // SLIDER
-    var abvSlider = document.getElementById("abvSlider");
-    var abvOutput = document.getElementById("abvSpan");
+    let abvSlider = document.getElementById("abvSlider");
+    let abvOutput = document.getElementById("abvSpan");
     abvOutput.innerHTML = abvSlider.value;
     abvSlider.oninput = function() {
         abvOutput.innerHTML = this.value;
     }
 
-    var ibuSlider = document.getElementById("ibuSlider");
-    var ibuOutput = document.getElementById("ibuSpan");
+    let ibuSlider = document.getElementById("ibuSlider");
+    let ibuOutput = document.getElementById("ibuSpan");
     ibuOutput.innerHTML = ibuSlider.value;
     ibuSlider.oninput = function() {
         ibuOutput.innerHTML = this.value;
     }
 
-    // MODAL
-    var modal = document.getElementById("myModal");
-    var btn = document.getElementById("bigBtn");
-    var closeX = document.getElementsByClassName("close")[0];
+    // MODAL SHOW & HIDE
+    let modal = document.getElementById("myModal");
+    let btn = document.getElementById("bigBtn");
 
     btn.onclick = function() {
         modal.style.display = "block";
     }
 
-    closeX.onclick = function() {
-        modal.style.display = "none";
-    }
-
     window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        //ska stänga modalen när man trycker på sök. funkar inte just nu.
-    $("#searchName").onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     }
+
+    $(".close").click(() => {
+        $(".modal").hide();
+    });
+
+    $("#searchName").click(() => {
+        $(".modal").hide();
+    });
+
+    $("#searchABV").click(() => {
+        $(".modal").hide();
+    });
+
+    $("#random").click(() => {
+        $(".modal").hide();
+    });
+
+    $("#beer-name").keydown(function(e) {
+        if (e.keyCode === 13) {
+            $(".modal").hide()
+        }
+    });
 
 }); //jQuery body ready
