@@ -1,6 +1,4 @@
-//jQuery start
 $(() => {
-
 
     $("#searchName").click(() => {
         callAPI();
@@ -20,57 +18,59 @@ $(() => {
         callRandomAPI();
     });
 
+    //ajax search
+    $("#beer-name").on("input", () => {
+            if ($("#beer-name").val().length > 2) {
+                let queryUrl = "https://api.punkapi.com/v2/beers?beer_name=" + $("#beer-name").val();
+
+                $.ajax({
+                    url: queryUrl,
+                    type: "GET",
+                    dataType: 'json',
+                    success: (result) => {
+                        $("#beerName").empty();
+                        for (let i in result) {
+                            let name = result[i].name;
+                            $("#beerName").append("<option>" + name + "</option>");
+                        }
+                    },
+                    error: (result) => {
+                        console.log("error on: " + result)
+                    }
+                })
+            }
+        }) //Ajax end
+
     function callAPI() {
         //search by name
-        let search = $("#beer-name");
-        fetch("https://api.punkapi.com/v2/beers?beer_name=" + search.val())
+        let search = document.getElementById("beer-name");
+
+        fetch("https://api.punkapi.com/v2/beers?beer_name=" + search.value)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 document.getElementById("beer-text").innerHTML = `The selected beer is <br> ${data[0].name}.`;
                 document.getElementById("beer-img").src = data[0].image_url;
                 document.getElementById("beer-food").innerHTML = `Food that match: ${data[0].food_pairing[0]}.`;
-                $("#googleBar").val(data[0].food_pairing[0]);
-                $(".googleSearch").fadeIn();
 
-                //ajax search, funkar inte just nu
-                $("#beer-name").on("input", () => {
-                    if ($("#beer-name").val().length > 2) {
-                        let queryUrl = "https://api.punkapi.com/v2/beers?beer_name=" + $("#beer-name").val();
-                        console.log(queryUrl) //såhär långt funkar det
-
-                        //Härifrån funkar det inte.
-                        $.ajax({
-                            url: queryUrl,
-                            dataType: 'json',
-                            success: (result) => {
-                                $("#beerName").empty();
-                                for (let i = 0; i < result.length; i++) {
-                                    let name = result[i];
-                                    $("#beerName").append(name);
-                                }
-                            }
-                        })
-                    }
-                })
-            }) //ajax end
-
+                document.getElementById("googleBar").value = data[0].food_pairing[0];
+                document.getElementsByClassName("googleSearch")[0].style.display = "block";
+            })
     }
 
 
     //Search ABV & IBU
     function callAbvAPI() {
-        let abv = $("#abvSlider");
-        let ibu = $("#ibuSlider");
-        fetch("https://api.punkapi.com/v2/beers?abv_gt=" + abv.val() + "&ibu_gt=" + ibu.val())
+        let abv = document.getElementById("abvSlider");
+        let ibu = document.getElementById("ibuSlider");
+        fetch("https://api.punkapi.com/v2/beers?abv_gt=" + abv.value + "&ibu_gt=" + ibu.value)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 document.getElementById("beer-text").innerHTML = `The selected beer is <br> ${data[0].name}.`;
                 document.getElementById("beer-img").src = data[0].image_url;
                 document.getElementById("beer-food").innerHTML = `Food that match: ${data[0].food_pairing[0]}.`;
-                $("#googleBar").val(data[0].food_pairing[0]);
-                $(".googleSearch").fadeIn();
+
+                document.getElementById("googleBar").value = data[0].food_pairing[0];
+                document.getElementsByClassName("googleSearch")[0].style.display = "block";
             })
     };
 
@@ -79,64 +79,13 @@ $(() => {
         fetch("https://api.punkapi.com/v2/beers/random")
             .then(res => res.json())
             .then(data => {
-                console.log(data[0]);
                 document.getElementById("beer-text").innerHTML = `The random beer is <br> ${data[0].name}.`;
                 document.getElementById("beer-img").src = data[0].image_url;
                 document.getElementById("beer-food").innerHTML = `Food that match: ${data[0].food_pairing[0]}`;
-                $("#googleBar").val(data[0].food_pairing[0]);
-                $(".googleSearch").fadeIn();
+
+                document.getElementById("googleBar").value = data[0].food_pairing[0];
+                document.getElementsByClassName("googleSearch")[0].style.display = "block";
             });
     }
 
-    // SLIDER
-    let abvSlider = document.getElementById("abvSlider");
-    let abvOutput = document.getElementById("abvSpan");
-    abvOutput.innerHTML = abvSlider.value;
-    abvSlider.oninput = function() {
-        abvOutput.innerHTML = this.value;
-    }
-
-    let ibuSlider = document.getElementById("ibuSlider");
-    let ibuOutput = document.getElementById("ibuSpan");
-    ibuOutput.innerHTML = ibuSlider.value;
-    ibuSlider.oninput = function() {
-        ibuOutput.innerHTML = this.value;
-    }
-
-    // MODAL SHOW & HIDE
-    let modal = document.getElementById("myModal");
-    let btn = document.getElementById("bigBtn");
-
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    $(".close").click(() => {
-        $(".modal").hide();
-    });
-
-    $("#searchName").click(() => {
-        $(".modal").hide();
-    });
-
-    $("#searchABV").click(() => {
-        $(".modal").hide();
-    });
-
-    $("#random").click(() => {
-        $(".modal").hide();
-    });
-
-    $("#beer-name").keydown(function(e) {
-        if (e.keyCode === 13) {
-            $(".modal").hide()
-        }
-    });
-
-}); //jQuery body ready
+});
